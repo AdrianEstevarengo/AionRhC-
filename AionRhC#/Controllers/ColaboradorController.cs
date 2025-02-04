@@ -44,7 +44,7 @@ namespace AionRhC_.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _context.AddAsync(colaborador);
+                await _repository.InsertAsync(colaborador);
                 return RedirectToAction(nameof(Index));
             }
             return View(colaborador);
