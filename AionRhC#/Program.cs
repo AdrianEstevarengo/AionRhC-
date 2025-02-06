@@ -17,6 +17,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 
 // Registra o repositório
 builder.Services.AddScoped<IColaboradorRepository, ColaboradorRepository>();
+builder.Services.AddScoped<IAdvertenciasRepository, AdvertenciasRepository>();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

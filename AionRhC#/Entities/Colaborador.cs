@@ -2,7 +2,7 @@
 {
     public class Colaborador
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string NomeCompleto { get; set; }
         public string Cargo { get; set; }
         public string Matricula { get; set; }
@@ -11,5 +11,6 @@
         public string Email { get; set; }
         public string Telefone { get; set; }
         public DateTime DataAdmissao { get; set; }
+        public List<Advertencias> ? Advertencias  { get; set; } = new List<Advertencias>();
     }
 }

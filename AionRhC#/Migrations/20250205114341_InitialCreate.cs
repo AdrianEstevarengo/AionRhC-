@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AionRhC_.Migrations
 {
     /// <inheritdoc />
-    public partial class CriandoBancoAionRh : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,15 +54,14 @@ namespace AionRhC_.Migrations
                 name: "Colaboradores",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NomeCompleto = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Cargo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Matricula = table.Column<int>(type: "int", nullable: false),
+                    Matricula = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Setor = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Situacao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefone = table.Column<int>(type: "int", nullable: false),
+                    Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DataAdmissao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

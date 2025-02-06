@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AionRhC_.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250204170530_ColaboradoresTable")]
-    partial class ColaboradoresTable
+    [Migration("20250205114341_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,9 @@ namespace AionRhC_.Migrations
 
             modelBuilder.Entity("AionRhC_.Entities.Colaborador", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Cargo")
                         .IsRequired()

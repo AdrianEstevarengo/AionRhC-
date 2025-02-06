@@ -1,24 +1,24 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 /* Estilos do Sidebar */
 .sidebar {
@@ -27,34 +27,67 @@ body {
     position: fixed;
     top: 0;
     left: -250px;
-    background-color: #343a40;
-    padding-top: 20px;
+    background-color: white;
     transition: 0.3s;
+    z-index: 1000;
+    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
 }
 
-    .sidebar a {
-        padding: 10px 15px;
-        text-decoration: none;
-        font-size: 18px;
-        color: white;
-        display: block;
-        transition: 0.3s;
+.sidebar-header {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra abaixo do cabeçalho da sidebar */
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 25px;
+    color: white;
+    transition: none; /* Remove transições para o botão de fechar */
+}
+    /* Garantir que o "X" não tenha foco ou hover */
+    .sidebar .closebtn:hover,
+    .sidebar .closebtn:focus {
+        color: white; /* Não altera a cor no hover ou foco */
+        background: none; /* Não aplica fundo */
+        outline: none; /* Remove qualquer borda de foco */
+    }
+/* Remover o efeito de hover no link "Colaboradores" */
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black; /* Mantém a cor preta por padrão */
+    display: block;
+    transition: background-color 0.3s ease; /* Transição apenas no fundo */
+}
+
+    .sidebar a:hover {
+        background-color: #d3d3d3; /* Cor de fundo levemente cinza */
+        color: black; /* Garante que a cor permaneça preta */
     }
 
-        .sidebar a:hover {
-            background-color: #575d63;
-        }
-
-    .sidebar .closebtn {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        font-size: 25px;
+    /* Caso o foco também altere a cor, você pode remover o estilo de foco */
+    .sidebar a:focus {
+        outline: none; /* Remove o contorno do foco */
     }
+
+.sidebar-header a {
+    color: white; /* Garante que o título continue branco */
+    text-decoration: none; /* Remove underline, caso exista */
+}
+
+    .sidebar-header a:hover {
+        background-color: transparent; /* Não altera o fundo */
+        color: white; /* Mantém a cor do texto branca */
+    }
+
+.botao-cadastrar {
+    text-decoration: none;
+}
 
 /* Ajuste do conteúdo principal */
 .main-content {
-    margin-left: 0;
     transition: 0.3s;
 }
 
@@ -65,3 +98,155 @@ body {
 .content-shift {
     margin-left: 250px;
 }
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-family: 'Open Sans', sans-serif;
+}
+
+    table thead th {
+        padding: 10px;
+        font-size: 1em;
+        font-weight: 600;
+        color: #000;
+    }
+
+    table tbody tr:nth-child(odd) {
+        background: #f2f2f2;
+    }
+
+    table tbody tr td {
+        padding: 10px;
+        text-align: left;
+        position: relative;
+    }
+
+        table tbody tr td button {
+            background: #4CAF50;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(34, 34, 34, 0.2);
+            color: #fff;
+            font-weight: 700;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+            table tbody tr td button:hover {
+                background: #a795fe;
+            }
+
+@media (max-width: 800px) {
+    table tbody tr td {
+        display: block;
+        text-align: right;
+    }
+
+        table tbody tr td:before {
+            content: attr(data-title);
+            position: absolute;
+            left: 15px;
+            font-weight: 600;
+        }
+
+    table thead {
+        display: none;
+    }
+
+    table tbody tr {
+        display: block;
+        border: 1px solid #dad6eb;
+        margin-bottom: 10px;
+    }
+}
+
+.cabecalho-colaboradores {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5%;
+}
+
+
+/* Botão "Novo Colaborador" estilizado */
+.custom-cadastrar-btn {
+    border: 1px solid #7c107c;
+    background-color: transparent;
+    color: #7c107c;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 8px 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+    .custom-cadastrar-btn:hover,
+    .custom-cadastrar-btn:focus {
+        background-color: #7c107c;
+        color: white;
+    }
+
+/* Ajuste para o estilo do link dentro do botão */
+.botao-cadastrar {
+    text-decoration: none;
+    color: inherit; /* Garantir que a cor do texto seja herdada */
+}
+
+/* Modificações no estilo geral para garantir consistência */
+.btn {
+    font-size: 14px;
+}
+
+.navbar {
+    margin-bottom: 1.5rem;
+}
+
+
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+}
+
+.text-danger {
+    font-size: 0.9em;
+    color: #dc3545;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Se necessário, ajusta a margem superior */
+}
+
+    .form-container form {
+        width: 100%;
+        max-width: 600px; /* Tamanho máximo do formulário */
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+/* Estilo para indicar que a linha é clicável */
+table tbody tr {
+    cursor: pointer;
+}
+
+    table tbody tr:hover {
+        background-color: #f8f9fa; /* Cor de fundo ao passar o mouse */
+    }
