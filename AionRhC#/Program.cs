@@ -1,6 +1,8 @@
 using AionRhC_.Data.Context;
 using AionRhC_.Data.Repositories;
 using AionRhC_.Data.Repositories.Interfaces;
+using Infra.Data.Repositories.Interfaces;
+using Infra.Data.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +20,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 // Registra o repositório
 builder.Services.AddScoped<IColaboradorRepository, ColaboradorRepository>();
 builder.Services.AddScoped<IAdvertenciasRepository, AdvertenciasRepository>();
+builder.Services.AddScoped<IContratoRepository, ContratoRepository>();
 
 
 // Add services to the container.

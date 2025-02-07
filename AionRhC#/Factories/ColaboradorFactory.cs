@@ -21,6 +21,7 @@ namespace AionRhC_.Factories
                 DataAdmissao = colaborador.DataAdmissao,
                 Advertencias = colaborador.Advertencias?.Select(a => new AdvertenciaViewModel
                 {
+                    Id = a.Id,
                     Data = a.Data,
                     DataVencimento = a.DataDeVencimento,
                     Observacao = a.Observacao
@@ -52,7 +53,7 @@ namespace AionRhC_.Factories
                 Data = a.Data,
                 DataDeVencimento = a.DataVencimento,
                 Observacao = a.Observacao,
-                IdColaborador = colaborador.Id
+                ColaboradorId = colaborador.Id
             }).ToList() ?? new List<Advertencias>();
 
             return colaborador;

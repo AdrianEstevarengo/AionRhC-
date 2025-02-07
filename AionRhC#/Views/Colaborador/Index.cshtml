@@ -183,7 +183,7 @@
                 type: 'GET',
                 success: function (data) {
                     $('#colaboradorId').val(data.id);
-                    $('#colaboradorNome').val(data.nomeCompleto);
+                    $('#colaboradorNome').val(data.nome);
                     $('#colaboradorCargo').val(data.cargo);
                     $('#colaboradorMatricula').val(data.matricula);
                     $('#colaboradorSetor').val(data.setor);
@@ -196,15 +196,22 @@
                     let advertenciasHtml = '';
                     if (data.advertencias && Array.isArray(data.advertencias)) {
                         data.advertencias.forEach(function (advertencia, index) {
+                            console.log("Advertência carregada:", advertencia);
+                            let dataFormatada = advertencia.data ? advertencia.data.split('T')[0] : '';
+                            let dataVencimentoFormatada = advertencia.dataVencimento ? advertencia.dataVencimento.split('T')[0] : '';
+
                             advertenciasHtml += `
                                         <tr>
-                                            <td>${advertencia.data}</td>
-                                            <td>${advertencia.dataVencimento}</td>
+                                            <td>${dataFormatada}</td>
+                                            <td>${dataVencimentoFormatada}</td>
                                             <td>${advertencia.observacao}</td>
-                                            <td><button class="btn btn-danger btn-sm" onclick="removerAdvertencia(${index})">Excluir</button></td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm" onclick="removerAdvertencia('${advertencia.id}')">Excluir</button>
+                                            </td>
                                         </tr>
                                     `;
                         });
+
                     } else {
                         advertenciasHtml = '<tr><td colspan="4">Nenhuma advertência registrada.</td></tr>';
                     }
@@ -216,6 +223,12 @@
         }
 
         function removerAdvertencia(id) {
+
+            if (!id || id === "0") {
+                alert("ID da advertência inválido.");
+                return;
+            }
+
             $.ajax({
                 url: '/Colaborador/RemoverAdvertencia/' + id,
                 type: 'DELETE',
@@ -228,20 +241,37 @@
                 }
             });
         }
+
         // Adicionar nova advertência
         $('#addAdvertenciaBtn').click(function () {
             let newRow = `
-                                <tr>
-                                    <td><input type="date" class="form-control advertenciaData"></td>
-                                    <td><input type="date" class="form-control advertenciaDataVencimento"></td>
-                                    <td><input type="text" class="form-control advertenciaObservacao"></td>
-                                    <td>
-                                            <button type="button" class="btn btn-success btn-sm salvarAdvertencia">Salvar</button>
-                                            <button type="button" class="btn btn-danger btn-sm removeAdvertencia">Excluir</button>
-                                    </td>
-                                </tr>`;
+                                                                                <tr>
+                                                                                    <td><input type="date" class="form-control advertenciaData"></td>
+                                                                                    <td><input type="date" class="form-control advertenciaDataVencimento"></td>
+                                                                                    <td><input type="text" class="form-control advertenciaObservacao"></td>
+                                                                                    <td>
+                                                                                            <button type="button" class="btn btn-success btn-sm salvarAdvertencia">Salvar</button>
+                                                                                            <button type="button" class="btn btn-danger btn-sm removeAdvertencia">Excluir</button>
+                                                                                    </td>
+                                                                                </tr>`;
             $('#advertenciasTableBody').append(newRow);
         });
+
+        // Ajusta a data de vencimento automaticamente para 3 anos depois
+        $(document).on('change', '.advertenciaData', function () {
+            ajustarDataVencimento($(this));
+        });
+
+        // Função para calcular a data de vencimento
+        function ajustarDataVencimento(inputData) {
+            let dataSelecionada = new Date(inputData.val());
+
+            if (!isNaN(dataSelecionada.getTime())) {
+                dataSelecionada.setFullYear(dataSelecionada.getFullYear() + 3);
+                let dataFormatada = dataSelecionada.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+                inputData.closest('tr').find('.advertenciaDataVencimento').val(dataFormatada);
+            }
+        }
 
         $(document).on('click', '.removeAdvertencia', function () {
             $(this).closest('tr').remove();
@@ -250,7 +280,7 @@
         $(document).on('click', '.salvarAdvertencia', function () {
             let row = $(this).closest('tr');
             let advertencia = {
-                idColaborador: $('#colaboradorId').val(),
+                ColaboradorId: $('#colaboradorId').val(),
                 data: row.find('.advertenciaData').val(),
                 dataVencimento: row.find('.advertenciaDataVencimento').val(),
                 observacao: row.find('.advertenciaObservacao').val()

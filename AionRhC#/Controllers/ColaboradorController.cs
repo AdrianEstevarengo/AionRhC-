@@ -25,16 +25,17 @@ namespace AionRhC_.Controllers
         public async Task<IActionResult> Index()
         {
             var colaboradores = await _ColaboradorRepository.GetAllAsync();
-            var viewModel = ColaboradorFactory.ListColaboradorToViewModelList(colaboradores);
-            return View(viewModel);
+            var colaboradoresViewModel = ColaboradorFactory.ListColaboradorToViewModelList(colaboradores);
+            return View(colaboradoresViewModel);
         }
 
         public async Task<IActionResult> Details(Guid id)
         {
-            var colaborador = await _ColaboradorRepository.GetByIdAsync(id);
+            var colaborador = await _ColaboradorRepository.GetAllColaboradorComAdvertenciasAsync(id);
             if (colaborador == null) return NotFound();
-
-            return Json(colaborador);
+            var colaboradoresViewModel = ColaboradorFactory.ColaboradorToViewModel(colaborador);
+           
+            return Json(colaboradoresViewModel);
         }
 
         public IActionResult Create()
@@ -90,39 +91,49 @@ namespace AionRhC_.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // Método para adicionar uma advertência
+        // Método para adicionar uma advertência 
         [HttpPost]
-        public async Task<IActionResult> AdicionarAdvertencia([FromBody] AdvertenciaViewModel model)
+        public async Task<IActionResult> AdicionarAdvertencia([FromBody] AdvertenciaViewModel advertenciaViewModel)
         {
-            if (model == null) return BadRequest("Dados inválidos.");
+            if (advertenciaViewModel == null || !ModelState.IsValid)
+                return BadRequest("Dados inválidos");
 
-            var colaborador = await _ColaboradorRepository.GetByIdAsync(model.IdColaborador);
-            if (colaborador == null) return NotFound();
-
-            var advertencia = new Advertencias
+            try
             {
-                Id = Guid.NewGuid(),
-                Data = model.Data,
-                DataDeVencimento = model.DataVencimento,
-                Observacao = model.Observacao,
-                IdColaborador = model.IdColaborador
-            };
+                // Verifica se o colaborador existe
+                var colaboradorExistente = await _ColaboradorRepository.GetByIdAsync(advertenciaViewModel.ColaboradorId);
+                if (colaboradorExistente == null)
+                    return BadRequest("Colaborador não encontrado.");
 
-            await _AdvertenciasRepository.InsertAsync(advertencia);
-            return Ok(new { success = true, message = "Advertência adicionada com sucesso!" });
+                var advertencia = new Advertencias
+                {
+                    Id = Guid.NewGuid(),
+                    Data = advertenciaViewModel.Data,
+                    DataDeVencimento = advertenciaViewModel.DataVencimento,
+                    Observacao = advertenciaViewModel.Observacao,
+                    ColaboradorId = advertenciaViewModel.ColaboradorId
+                };
+
+                await _AdvertenciasRepository.InsertAsync(advertencia);
+                return Ok(new { success = true, message = "Advertência adicionada com sucesso!" });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao adicionar advertência: {ex.Message}");
+                return StatusCode(500, "Erro ao salvar advertência.");
+            }
         }
 
 
         // Método para remover uma advertência
-        [HttpPost]
-        public async Task<IActionResult> RemoverAdvertencia(Guid colaboradorId, Guid advertenciaId)
+        [HttpDelete]
+        public async Task<IActionResult> RemoverAdvertencia(Guid id)
         {
-            var advertencia = await _AdvertenciasRepository.GetByIdAsync(advertenciaId);
-            if (advertencia == null) return NotFound();
+            var advertencia = await _AdvertenciasRepository.GetByIdAsync(id);
+            if (advertencia == null) return NotFound("Advertência não encontrada");
 
-            await _AdvertenciasRepository.DeleteAsync(advertenciaId);
-
-            return RedirectToAction(nameof(Edit), new { id = colaboradorId });
+            await _AdvertenciasRepository.DeleteAsync(id);
+            return Ok(new { success = true, message = "Advertência removida com sucesso!" });
         }
     }
 }
