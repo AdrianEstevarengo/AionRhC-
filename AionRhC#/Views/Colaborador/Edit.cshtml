@@ -1,4 +1,5 @@
-﻿@model AionRhC_.Entities.Colaborador
+﻿@using Domain.Enums
+@model AionRhC_.Entities.Colaborador
 
 @{
     ViewData["Title"] = "Edit";
@@ -31,7 +32,10 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label asp-for="Setor" class="control-label"></label>
-                    <input asp-for="Setor" class="form-control" />
+                    <select asp-for="Setor" class="form-control"
+                            asp-items="Html.GetEnumSelectList<SetorialEnum>().Select(item => new SelectListItem { Text = item.Text, Value = item.Value })" required>
+                        <option value="" selected="selected">Selecione...</option>
+                    </select>
                     <span asp-validation-for="Setor" class="text-danger"></span>
                 </div>
             </div>
@@ -44,7 +48,10 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label asp-for="Situacao" class="control-label"></label>
-                    <input asp-for="Situacao" class="form-control" />
+                    <select asp-for="Situacao" class="form-control"
+                            asp-items="Html.GetEnumSelectList<SituacaoColaboradorEnum>().Select(item => new SelectListItem { Text = item.Text, Value = item.Value })" required>
+                        <option value="" selected="selected">Selecione...</option>
+                    </select>
                     <span asp-validation-for="Situacao" class="text-danger"></span>
                 </div>
             </div>

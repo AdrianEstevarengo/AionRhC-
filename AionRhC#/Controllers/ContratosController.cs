@@ -18,18 +18,18 @@ namespace AionRhC_.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var contratos = await _contratoRepository.GetAllContratosAsync();
+            var contratos = await _contratoRepository.GetAllAsync();
             return View(contratos);
         }
 
-        public IActionResult Create()
+        public IActionResult CriarContrato()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Contratos contrato)
+        public async Task<IActionResult> CriarContrato(Contratos contrato)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace AionRhC_.Controllers
                 return NotFound();
             }
             var contratosViewModel = ContratosFactory.EntityParaContratosViewModel(contrato);
-            return PartialView(viewName: "Contratos/_DetailsContratoModal", model: contratosViewModel);
+            return PartialView(viewName: "_DetailsContratoModal", model: contratosViewModel);
         }
 
         [HttpPost]
@@ -91,7 +91,7 @@ namespace AionRhC_.Controllers
             contrato.Ativo = true;
             await _contratoRepository.UpdateAsync(contrato);
 
-            return RedirectToAction(nameof(Contratos));
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
@@ -107,7 +107,7 @@ namespace AionRhC_.Controllers
             contrato.Ativo = false;
             await _contratoRepository.UpdateAsync(contrato);
 
-            return RedirectToAction(nameof(Contratos));
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> BuscarContratos(string termoDeBusca)

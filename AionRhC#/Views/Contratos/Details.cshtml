@@ -1,0 +1,107 @@
+﻿@model Aion.ViewModels.ContratosViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Contratos</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Responsavel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Responsavel)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fiscal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fiscal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumeroProcesso)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumeroProcesso)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Empresa)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Empresa)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Situacao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Situacao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Observacoes)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Observacoes)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RecebimentoNf)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RecebimentoNf)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PrazoComissao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PrazoComissao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RecebimentoDefinitivo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RecebimentoDefinitivo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PrazoParaLiquidacao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PrazoParaLiquidacao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PrazoPagamento)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PrazoPagamento)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Liquidacao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Liquidacao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PagamentoSigef)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PagamentoSigef)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ativo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ativo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -18,6 +18,8 @@ namespace AionRhC_.Factories
                 Situacao = colaborador.Situacao,
                 Email = colaborador.Email,
                 Telefone = colaborador.Telefone,
+                TelefoneEmergencia = colaborador.TelefoneEmergencia,
+                Status = colaborador.Status,
                 DataAdmissao = colaborador.DataAdmissao,
                 Advertencias = colaborador.Advertencias?.Select(a => new AdvertenciaViewModel
                 {
@@ -46,6 +48,8 @@ namespace AionRhC_.Factories
             colaborador.Situacao = viewModel.Situacao;
             colaborador.Email = viewModel.Email;
             colaborador.Telefone = viewModel.Telefone;
+            colaborador.TelefoneEmergencia = viewModel.TelefoneEmergencia;
+            colaborador.Status = viewModel.Status;
             colaborador.DataAdmissao = viewModel.DataAdmissao;
             colaborador.Advertencias = viewModel.Advertencias?.Select(a => new Advertencias
             {

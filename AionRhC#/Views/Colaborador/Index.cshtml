@@ -7,7 +7,6 @@
 <header class="cabecalho-colaboradores">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <!-- Botão estilizado para combinar com o botão do Ionic -->
             <button type="button" class=" custom-cadastrar-btn">
                 <a asp-action="Create" class="botao-cadastrar">Novo Colaborador</a>
             </button>
@@ -111,6 +110,7 @@
                 <th>@Html.DisplayNameFor(model => model.Email)</th>
                 <th>@Html.DisplayNameFor(model => model.Telefone)</th>
                 <th>@Html.DisplayNameFor(model => model.DataAdmissao)</th>
+                <th>Status</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -126,6 +126,20 @@
                     <td>@Html.DisplayFor(modelItem => item.Email)</td>
                     <td>@Html.DisplayFor(modelItem => item.Telefone)</td>
                     <td>@Html.DisplayFor(modelItem => item.DataAdmissao)</td>
+                    <td>
+                        @if (item.Status == true)
+                        {
+                            <span style="color: green;">
+                                <i class="bi bi-circle-fill"></i> Ativo
+                            </span>
+                        }
+                        else
+                        {
+                            <span style="color: red;">
+                                <i class="bi bi-circle-fill">Inativo</i>
+                            </span>
+                        }
+                    </td>
                     <td>
                         <button class="btn btn-link text-danger" title="Deletar" data-bs-toggle="modal" data-bs-target="#deleteModal"
                                 data-id="@item.Id" data-nome="@item.Nome">
