@@ -5,7 +5,7 @@ using Domain.Enums;
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace Aion.ViewModels
+namespace AionRhC_.Models
 {
     public class ContratosViewModel
     {

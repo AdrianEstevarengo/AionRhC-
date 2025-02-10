@@ -1,5 +1,4 @@
-﻿using Aion.ViewModels;
-
+﻿using AionRhC_.Models;
 using Domain.Entities;
 
 namespace Aion.Factories

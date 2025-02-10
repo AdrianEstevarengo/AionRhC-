@@ -1,5 +1,4 @@
 ﻿using Aion.Factories;
-using Aion.ViewModels;
 using Domain.Entities;
 using Domain.Enums;
 using Infra.Data.Repositories.Interfaces;

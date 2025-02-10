@@ -1,4 +1,5 @@
-﻿using Domain.Enums;
+﻿using AionRhC_.Models;
+using Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace AionRhC_.Models

@@ -1,10 +1,8 @@
 ﻿using AionRhC_.Data.Context;
-using AionRhC_.Data.Repositories;
 using AionRhC_.Data.Repositories.Interfaces;
 using AionRhC_.Entities;
 using AionRhC_.Factories;
 using AionRhC_.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AionRhC_.Controllers
